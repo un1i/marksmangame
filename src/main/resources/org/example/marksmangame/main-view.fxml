@@ -1,66 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.marksmangame.MainController">
+<BorderPane fx:id="main" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.marksmangame.MainController">
    <bottom>
-      <HBox alignment="CENTER_LEFT" prefHeight="60.0" minHeight="60.0" prefWidth="600.0" style="-fx-background-color: #cccccc;" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_LEFT" minHeight="60.0" prefHeight="60.0" prefWidth="600.0" spacing="50.0" style="-fx-background-color: #cccccc;" BorderPane.alignment="CENTER">
            <children>
-              <Button mnemonicParsing="false" onAction="#start" text="Старт">
+              <Button fx:id="ready_button" mnemonicParsing="false" onAction="#ready" text="Готов">
                <HBox.margin>
-                  <Insets left="15.0" />
+                  <Insets left="10.0" />
                </HBox.margin></Button>
             <Button mnemonicParsing="false" onAction="#stop" text="Стоп">
-               <HBox.margin>
-                  <Insets left="15.0" />
-               </HBox.margin>
+
             </Button>
               <Button mnemonicParsing="false" onAction="#pause_game" text="Пауза">
-               <HBox.margin>
-                  <Insets left="15.0" />
-               </HBox.margin></Button>
+               </Button>
               <Button mnemonicParsing="false" onAction="#continue_game" text="Продолжить">
                <HBox.margin>
-                  <Insets left="15.0" />
                </HBox.margin></Button>
               <Button mnemonicParsing="false" onAction="#shoot" text="Выстрел">
                <HBox.margin>
-                  <Insets left="50.0" />
+                  <Insets left="30.0" />
                </HBox.margin></Button>
            </children>
       </HBox>
    </bottom>
    <right>
-      <VBox alignment="TOP_CENTER" prefHeight="335.0" prefWidth="125.0" style="-fx-background-color: #cccccc;" BorderPane.alignment="CENTER">
+      <VBox fx:id="RightVBox" alignment="TOP_CENTER" prefHeight="335.0" prefWidth="125.0" style="-fx-background-color: #cccccc;" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Счет игрока">
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin></Label>
-            <Label fx:id="score_cnt_label" text="0">
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Label>
-            <Label text="Выстрелы">
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Label>
-            <Label fx:id="shoot_cnt_label" text="0">
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Label>
                </children>
       </VBox>
    </right>
    <center>
-      <Pane fx:id="playing_field" prefHeight="540.0" minHeight="540.0" prefWidth="775.0" BorderPane.alignment="CENTER">
+      <Pane fx:id="playing_field" minHeight="540.0" prefHeight="540.0" prefWidth="775.0" BorderPane.alignment="CENTER">
          <children>
             <Circle fx:id="big_target" fill="#ff1e00" layoutX="475.0" layoutY="270.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
             <Circle fx:id="small_target" fill="#ff1e00" layoutX="675.0" layoutY="270.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
@@ -68,27 +43,9 @@
       </Pane>
    </center>
    <left>
-      <GridPane style="-fx-background-color: #ffff66;" BorderPane.alignment="CENTER" prefWidth="100.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+      <VBox fx:id="LeftVBox" prefWidth="100.0" style="-fx-background-color: #ffff66;" BorderPane.alignment="CENTER">
          <children>
-            <Polygon fx:id="player" fill="#00e600" rotate="90.0" scaleX="0.6" scaleY="0.6" stroke="BLACK" strokeType="INSIDE" GridPane.rowIndex="1">
-              <points>
-                <Double fx:value="-50.0" />
-                <Double fx:value="40.0" />
-                <Double fx:value="50.0" />
-                <Double fx:value="40.0" />
-                <Double fx:value="0.0" />
-                <Double fx:value="-60.0" />
-              </points>
-            </Polygon>
          </children>
-      </GridPane>
+      </VBox>
    </left>
 </BorderPane>

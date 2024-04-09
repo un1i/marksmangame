@@ -1,0 +1,14 @@
+Button {
+    -fx-background-color: yellow;
+}
+Button:hover, .ready-btn:hover, .unready-btn:hover{
+    -fx-background-color: #F5F5F5;
+}
+.ready-btn {
+    -fx-background-color: green;
+}
+
+.unready-btn {
+    -fx-background-color: red;
+}
+

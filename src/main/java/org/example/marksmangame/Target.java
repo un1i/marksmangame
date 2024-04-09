@@ -3,18 +3,15 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 
 public class Target {
+    static double field_height = AppConfig.height;
     private final Circle circle;
     private boolean is_upper;
     private final int speed;
-    private int points;
+    private final int points;
+    private final double x_distance;
 
-    private Pane field;
-
-    private double x_distance;
-
-    Target(Circle shape, Pane target_field, double distance_from_edge, int target_speed, int points_for_hit) {
+    Target(Circle shape, double distance_from_edge, int target_speed, int points_for_hit) {
         circle = shape;
-        field = target_field;
         is_upper = true;
         speed = target_speed;
         points = points_for_hit;
@@ -32,7 +29,7 @@ public class Target {
             }
         }
         else {
-            if (circle.getLayoutY() + circle.getRadius() + speed <= field.getHeight()) {
+            if (circle.getLayoutY() + circle.getRadius() + speed <= field_height) {
                 circle.setLayoutY(circle.getLayoutY() + speed);
             }
             else {
@@ -56,6 +53,6 @@ public class Target {
     public void set_start_coords() {
         is_upper = true;
         circle.setLayoutX(x_distance);
-        circle.setLayoutY(field.getHeight() / 2);
+        circle.setLayoutY(field_height / 2);
     }
 }
