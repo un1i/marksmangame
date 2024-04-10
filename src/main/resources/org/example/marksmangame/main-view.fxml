@@ -13,14 +13,8 @@
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin></Button>
-            <Button mnemonicParsing="false" onAction="#stop" text="Стоп">
-
-            </Button>
               <Button mnemonicParsing="false" onAction="#pause_game" text="Пауза">
                </Button>
-              <Button mnemonicParsing="false" onAction="#continue_game" text="Продолжить">
-               <HBox.margin>
-               </HBox.margin></Button>
               <Button mnemonicParsing="false" onAction="#shoot" text="Выстрел">
                <HBox.margin>
                   <Insets left="30.0" />

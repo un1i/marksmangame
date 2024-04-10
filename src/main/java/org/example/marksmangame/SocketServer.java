@@ -42,12 +42,20 @@ public class SocketServer {
                 if (!model.is_run_game() && model.check_ready()) {
                     model.run_game();
                 }
+                else if (model.is_run_game() && model.is_pause() && model.check_ready()) {
+                    model.unpause_game();
+                }
             }
             else if (msg.get_action() == MsgAction.SHOT) {
                 Player player = model.get_player(model.get_player_id(ss.getPort()));
                 if (!player.get_arrow().is_active()) {
                     player.info.increase_shots();
                     player.get_arrow().set_active(msg.get_signal());
+                }
+            }
+            else if (msg.get_action() == MsgAction.PAUSE) {
+                if (!model.is_pause()) {
+                    model.pause_game();
                 }
             }
 

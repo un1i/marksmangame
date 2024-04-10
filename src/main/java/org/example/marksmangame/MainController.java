@@ -3,18 +3,10 @@ package org.example.marksmangame;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Polygon;
-
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.Socket;
 
 public class MainController {
     @FXML
@@ -30,24 +22,9 @@ public class MainController {
     private Circle big_target;
     @FXML
     private Circle small_target;
-    @FXML
-    private Polygon player;
-    @FXML
-    private Label score_cnt_label;
-    @FXML
-    private Label shoot_cnt_label;
-
-    private PlayerInfoControlPanel controlPane;
-
+    private PlayerInfoControlPanel controlPanel;
     private PlayerIconsField iconsField;
-
-    private Thread gaming_thread;
-    private boolean is_pause;
-    private boolean is_run_game;
-    private Target[] targets;
     private Arrow[] arrows;
-    int shot_counter;
-    int score;
 
     ClientModel model = BClientModel.get_model();
 
@@ -57,27 +34,15 @@ public class MainController {
         ready_button.getStyleClass().add("unready-btn");
         model.mc = this;
         arrows = new Arrow[4];
-        controlPane = new PlayerInfoControlPanel();
-        RightVBox.getChildren().add(controlPane);
+        controlPanel = new PlayerInfoControlPanel();
+        RightVBox.getChildren().add(controlPanel);
         iconsField = new PlayerIconsField();
         LeftVBox.getChildren().add(iconsField);
 
         for (int i = 0; i < 4; i++) {
             arrows[i] = new Arrow();
         }
-        is_run_game = false;
-        is_pause = false;
-        targets = new Target[] {
-                new Target(big_target,
-                        AppConfig.big_target_distance,
-                        AppConfig.big_target_speed,
-                        AppConfig.big_target_points_for_hit),
-                new Target(small_target,
-                        AppConfig.small_target_distance,
-                        AppConfig.small_target_speed,
-                        AppConfig.small_target_points_for_hit)
-        };
-        gaming_thread = null;
+
         ConnectWindow connect_window = new ConnectWindow();
         connect_window.show();
     }
@@ -97,16 +62,6 @@ public class MainController {
     }
 
     @FXML
-    void stop() {
-        if (is_run_game) {
-            is_run_game = false;
-            gaming_thread.interrupt();
-            gaming_thread = null;
-            is_pause = false;
-        }
-    }
-
-    @FXML
     void shoot() {
         if (model.cls != null) {
             model.cls.send_signal(new SignalMsg(MsgAction.SHOT, true));
@@ -115,40 +70,15 @@ public class MainController {
 
     @FXML
     void pause_game() {
-        if (is_run_game) {
-            is_pause = true;
+        if (model.cls != null) {
+            model.cls.send_signal(new SignalMsg(MsgAction.PAUSE, true));
         }
-    }
-
-    @FXML
-    void continue_game() {
-        if (is_run_game && is_pause) {
-            is_pause = false;
-            synchronized (this) {
-                notifyAll();
-            }
-        }
-    }
-
-    private void update_shoot_cnt() {
-        shoot_cnt_label.setText(Integer.toString(shot_counter));
-    }
-
-    private void update_score() {
-        score_cnt_label.setText(Integer.toString(score));
-    }
-
-    private void reset_score() {
-        shot_counter = 0;
-        score = 0;
-        update_score();
-        update_shoot_cnt();
     }
 
     public void add_new_player(PlayerInfo info) {
         Platform.runLater( () -> {
             iconsField.add_new_icon(info.id, info.id == model.player_id);
-            controlPane.add_new_player(info);
+            controlPanel.add_new_player(info);
         });
     }
     public void update_data(PlayerInfo[] infos) {
@@ -173,7 +103,7 @@ public class MainController {
                     playing_field.getChildren().remove(arrows[i]);
                 }
             }
-            controlPane.update_data(infos);
+            controlPanel.update_data(infos);
         });
     }
 

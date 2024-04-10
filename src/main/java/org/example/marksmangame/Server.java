@@ -76,11 +76,16 @@ public class Server {
     }
 
     public void start_game() {
-        model.set_is_run_game(true);
         model.clear_statistic();
         game_thread = new Thread(this::game);
         game_thread.setDaemon(true);
         game_thread.start();
+    }
+
+    public void unpause_game() {
+        synchronized (this) {
+            notifyAll();
+        }
     }
 
     void stop_game() {
@@ -94,6 +99,11 @@ public class Server {
     void game() {
         try {
             while (model.game_status) {
+                if (model.is_pause()) {
+                    synchronized (this) {
+                        this.wait();
+                    }
+                }
                 model.move_arrows();
                 model.move_targets();
                 for (ServerTarget target : model.get_targets()) {

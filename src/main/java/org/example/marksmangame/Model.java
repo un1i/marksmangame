@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class Model {
-    DAO dao = new DAO();
-
     Server server = null;
 
     public static final ServerArrow[] arrows = {
@@ -18,6 +16,8 @@ public class Model {
     static final int max_players = AppConfig.max_players;
 
     boolean game_status = false;
+
+    boolean pause_status = false;
 
     int cnt_players = 0;
 
@@ -72,10 +72,6 @@ public class Model {
                 player.get_socket().send_unready();
             }
         }
-    }
-
-    void increase_score(int val) {
-        dao.set_score(dao.get_score() + val);
     }
 
     public void send_winner(PlayerInfo info) {
@@ -157,7 +153,22 @@ public class Model {
         return true;
     }
 
+    public boolean is_pause() {
+        return pause_status;
+    }
+
+    public void pause_game() {
+        pause_status = true;
+        send_unready_players();
+    }
+
+    public void unpause_game() {
+        pause_status = false;
+        server.unpause_game();
+    }
+
     public void run_game() {
+        game_status = true;
         server.start_game();
     }
 

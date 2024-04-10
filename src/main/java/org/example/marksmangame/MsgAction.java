@@ -7,6 +7,6 @@ public enum MsgAction {
     SHOT,
     NEW_PLAYER,
     WINNER,
-    SET_UNREADY
-
+    SET_UNREADY,
+    PAUSE
 }
