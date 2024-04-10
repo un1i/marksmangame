@@ -1,10 +1,10 @@
-package org.example.marksmangame;
+package org.example.marksmangame.messages;
 
 public class SignalMsg {
     MsgAction action;
     boolean signal;
 
-    SignalMsg(MsgAction action, boolean signal) {
+    public SignalMsg(MsgAction action, boolean signal) {
         this.action = action;
         this.signal = signal;
     }

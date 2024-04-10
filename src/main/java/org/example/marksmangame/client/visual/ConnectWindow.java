@@ -1,4 +1,4 @@
-package org.example.marksmangame;
+package org.example.marksmangame.client.visual;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -8,6 +8,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.example.marksmangame.client.BClientModel;
+import org.example.marksmangame.client.ClientModel;
+import org.example.marksmangame.client.SocketClient;
+import org.example.marksmangame.messages.AuthResponse;
 
 import java.io.IOException;
 import java.net.InetAddress;

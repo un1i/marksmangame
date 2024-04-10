@@ -1,6 +1,11 @@
-package org.example.marksmangame;
+package org.example.marksmangame.client;
 
 import com.google.gson.Gson;
+import org.example.marksmangame.messages.Msg;
+import org.example.marksmangame.messages.MsgAction;
+import org.example.marksmangame.messages.AuthResponse;
+import org.example.marksmangame.messages.SignalMsg;
+import org.example.marksmangame.messages.AuthMsg;
 
 import java.io.*;
 import java.net.Socket;

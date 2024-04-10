@@ -1,12 +1,13 @@
-package org.example.marksmangame;
+package org.example.marksmangame.client.visual;
 
 import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import org.example.marksmangame.AppConfig;
 
 public class PlayerIconsField extends GridPane {
     PlayerIcon[] icons;
-    PlayerIconsField() {
+    public PlayerIconsField() {
         super();
         this.addColumn(0);
         for (int i = 0; i < AppConfig.max_players; i++) {
@@ -16,7 +17,7 @@ public class PlayerIconsField extends GridPane {
         icons = new PlayerIcon[AppConfig.max_players];
     }
 
-    void add_new_icon(int id, boolean is_main) {
+    public void add_new_icon(int id, boolean is_main) {
         if (icons[id] == null){
             icons[id] = new PlayerIcon(is_main);
             this.add(icons[id], 0, id);

@@ -1,4 +1,4 @@
-package org.example.marksmangame;
+package org.example.marksmangame.server;
 
 public class BModel {
     static final Model model = new Model();

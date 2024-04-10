@@ -1,9 +1,10 @@
-package org.example.marksmangame;
+package org.example.marksmangame.client;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.example.marksmangame.AppConfig;
 
 import java.io.IOException;
 

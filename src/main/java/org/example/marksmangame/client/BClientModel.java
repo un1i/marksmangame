@@ -1,4 +1,4 @@
-package org.example.marksmangame;
+package org.example.marksmangame.client;
 
 public class BClientModel {
     static final ClientModel model = new ClientModel();

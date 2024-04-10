@@ -1,4 +1,8 @@
-package org.example.marksmangame;
+package org.example.marksmangame.messages;
+
+import org.example.marksmangame.client.PlayerInfo;
+import org.example.marksmangame.messages.MsgData.ArrowData;
+import org.example.marksmangame.messages.MsgData.Point;
 
 public class Msg {
     MsgAction action;
@@ -16,11 +20,11 @@ public class Msg {
         this.info = info;
     }
 
-    MsgAction get_action() {
+    public MsgAction get_action() {
         return action;
     }
 
-    Point[] get_target() {
+    public Point[] get_target() {
         return targets;
     }
 

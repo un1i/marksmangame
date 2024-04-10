@@ -1,4 +1,7 @@
-package org.example.marksmangame;
+package org.example.marksmangame.client;
+
+import org.example.marksmangame.server.ServerArrow;
+import org.example.marksmangame.server.SocketServer;
 
 public class Player {
     SocketServer socket;
@@ -6,7 +9,7 @@ public class Player {
     PlayerInfo info;
     ServerArrow arrow;
 
-    Player(SocketServer socket, ServerArrow arrow, int id, String name) {
+    public Player(SocketServer socket, ServerArrow arrow, int id, String name) {
         this.socket = socket;
         ready_status = false;
         this.arrow = arrow;

@@ -1,4 +1,4 @@
-package org.example.marksmangame;
+package org.example.marksmangame.messages;
 
 public enum MsgAction {
     SEND_DATA,

@@ -1,4 +1,4 @@
-package org.example.marksmangame;
+package org.example.marksmangame.client;
 
 import javafx.scene.shape.Polygon;
 

@@ -1,10 +1,10 @@
-package org.example.marksmangame;
+package org.example.marksmangame.messages;
 
 public class AuthResponse {
     boolean result;
     String text;
 
-    AuthResponse(boolean is_connected, String text) {
+    public AuthResponse(boolean is_connected, String text) {
         result = is_connected;
         this.text = text;
     }

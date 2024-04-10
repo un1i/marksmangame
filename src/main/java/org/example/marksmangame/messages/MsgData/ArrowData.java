@@ -1,10 +1,10 @@
-package org.example.marksmangame;
+package org.example.marksmangame.messages.MsgData;
 
 public class ArrowData {
     Point coords;
     boolean active_flag;
 
-    ArrowData(Point coords, boolean is_actve) {
+    public ArrowData(Point coords, boolean is_actve) {
         this.coords = coords;
         this.active_flag = is_actve;
     }

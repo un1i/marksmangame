@@ -1,12 +1,14 @@
-package org.example.marksmangame;
+package org.example.marksmangame.client.visual;
 
 import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import org.example.marksmangame.AppConfig;
+import org.example.marksmangame.client.PlayerInfo;
 
 public class PlayerInfoControlPanel extends GridPane {
     PlayerInfoVBox[] players;
-    PlayerInfoControlPanel() {
+    public PlayerInfoControlPanel() {
         super();
         this.addColumn(0);
         for (int i = 0; i < AppConfig.max_players; i++) {

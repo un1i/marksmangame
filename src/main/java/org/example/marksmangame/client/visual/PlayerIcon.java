@@ -1,10 +1,10 @@
-package org.example.marksmangame;
+package org.example.marksmangame.client.visual;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 
 public class PlayerIcon extends Polygon {
-    PlayerIcon(boolean is_main) {
+    public PlayerIcon(boolean is_main) {
         super(
             50, 25,
                 0, 50,

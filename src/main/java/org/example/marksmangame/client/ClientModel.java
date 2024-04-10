@@ -1,8 +1,11 @@
-package org.example.marksmangame;
+package org.example.marksmangame.client;
+
+import org.example.marksmangame.messages.MsgData.ArrowData;
+import org.example.marksmangame.messages.MsgData.Point;
 
 public class ClientModel {
 
-    SocketClient cls = null;
+    public SocketClient cls = null;
     public MainController mc;
     Point[] target_coords;
     ArrowData[] arrows;

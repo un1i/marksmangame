@@ -1,4 +1,4 @@
-package org.example.marksmangame;
+package org.example.marksmangame.client;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -7,6 +7,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+import org.example.marksmangame.client.visual.ConnectWindow;
+import org.example.marksmangame.client.visual.PlayerIconsField;
+import org.example.marksmangame.client.visual.PlayerInfoControlPanel;
+import org.example.marksmangame.client.visual.WinnerWindow;
+import org.example.marksmangame.messages.MsgData.ArrowData;
+import org.example.marksmangame.messages.MsgAction;
+import org.example.marksmangame.messages.MsgData.Point;
+import org.example.marksmangame.messages.SignalMsg;
 
 public class MainController {
     @FXML

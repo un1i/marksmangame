@@ -1,4 +1,7 @@
-package org.example.marksmangame;
+package org.example.marksmangame.server;
+
+import org.example.marksmangame.AppConfig;
+import org.example.marksmangame.messages.MsgData.Point;
 
 public class ServerTarget {
     static double field_height = AppConfig.playing_field_height;

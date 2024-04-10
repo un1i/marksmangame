@@ -1,10 +1,10 @@
-package org.example.marksmangame;
+package org.example.marksmangame.messages.MsgData;
 
 public class Point {
     public double x;
     public double y;
 
-    Point(double x, double y) {
+    public Point(double x, double y) {
         this.x = x;
         this.y = y;
     }

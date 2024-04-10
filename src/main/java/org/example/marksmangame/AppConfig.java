@@ -15,6 +15,7 @@ public class AppConfig {
     public static int big_target_points_for_hit = 1;
     public static int small_target_points_for_hit = 2;
     public static double playing_field_height = 540;
+    public static double playing_field_width = 774.4;
 
     public static int points_for_win = 1;
 

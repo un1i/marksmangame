@@ -1,4 +1,10 @@
-package org.example.marksmangame;
+package org.example.marksmangame.server;
+
+import org.example.marksmangame.*;
+import org.example.marksmangame.client.Player;
+import org.example.marksmangame.client.PlayerInfo;
+import org.example.marksmangame.messages.MsgData.ArrowData;
+import org.example.marksmangame.messages.MsgData.Point;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -7,10 +13,10 @@ public class Model {
     Server server = null;
 
     public static final ServerArrow[] arrows = {
-            new ServerArrow(new Point(0, 100)),
+            new ServerArrow(new Point(0, 65)),
             new ServerArrow(new Point(0, 200)),
-            new ServerArrow(new Point(0, 300)),
-            new ServerArrow(new Point(0, 400))
+            new ServerArrow(new Point(0, 335)),
+            new ServerArrow(new Point(0, 470))
     };
     ServerTarget[] targets;
     static final int max_players = AppConfig.max_players;
@@ -39,7 +45,7 @@ public class Model {
 
     void move_arrows() {
         for (Player player: players) {
-            if (player != null && player.arrow.is_active()) {
+            if (player != null && player.get_arrow().is_active()) {
                 player.get_arrow().move();
             }
         }
@@ -210,6 +216,10 @@ public class Model {
 
     public void decrease_cnt_players() {
         cnt_players--;
+        if (cnt_players == 0) {
+            game_status = false;
+            pause_status = false;
+        }
     }
 
     public static int get_max_players() {

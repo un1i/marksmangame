@@ -1,8 +1,10 @@
-package org.example.marksmangame;
+package org.example.marksmangame.client.visual;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import org.example.marksmangame.AppConfig;
+import org.example.marksmangame.client.PlayerInfo;
 
 public class PlayerInfoVBox extends VBox {
     Label name_label;
@@ -10,7 +12,7 @@ public class PlayerInfoVBox extends VBox {
     Label shots_label;
     Label score_val;
     Label shots_val;
-    PlayerInfoVBox(PlayerInfo info) {
+    public PlayerInfoVBox(PlayerInfo info) {
         super();
         double height = AppConfig.playing_field_height / 4;
         this.setHeight(height);

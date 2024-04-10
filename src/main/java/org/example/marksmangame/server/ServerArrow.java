@@ -1,7 +1,10 @@
-package org.example.marksmangame;
+package org.example.marksmangame.server;
+
+import org.example.marksmangame.AppConfig;
+import org.example.marksmangame.messages.MsgData.Point;
 
 public class ServerArrow {
-    static double field_width = AppConfig.width;
+    static double field_width = AppConfig.playing_field_width;
     private boolean activity_flag;
     private final int speed;
     private final Point start_coords;

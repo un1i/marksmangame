@@ -1,4 +1,10 @@
-package org.example.marksmangame;
+package org.example.marksmangame.server;
+
+import org.example.marksmangame.*;
+import org.example.marksmangame.client.Player;
+import org.example.marksmangame.messages.AuthMsg;
+import org.example.marksmangame.messages.AuthResponse;
+import org.example.marksmangame.messages.MsgData.Point;
 
 import java.io.IOException;
 import java.net.InetAddress;

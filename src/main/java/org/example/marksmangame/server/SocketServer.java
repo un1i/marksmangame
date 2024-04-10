@@ -1,6 +1,10 @@
-package org.example.marksmangame;
+package org.example.marksmangame.server;
 
 import com.google.gson.Gson;
+import org.example.marksmangame.messages.MsgData.ArrowData;
+import org.example.marksmangame.client.Player;
+import org.example.marksmangame.client.PlayerInfo;
+import org.example.marksmangame.messages.*;
 
 import java.io.*;
 import java.net.Socket;
@@ -37,6 +41,11 @@ public class SocketServer {
     void run() {
         while (true) {
             SignalMsg msg = read_msg();
+            if (msg == null) {
+                model.add_player(model.get_player_id(ss.getPort()), null);
+                model.decrease_cnt_players();
+                break;
+            }
             if (msg.get_action() == MsgAction.SET_READY) {
                 model.get_player(model.get_player_id(ss.getPort())).set_ready(msg.get_signal());
                 if (!model.is_run_game() && model.check_ready()) {
@@ -49,7 +58,7 @@ public class SocketServer {
             else if (msg.get_action() == MsgAction.SHOT) {
                 Player player = model.get_player(model.get_player_id(ss.getPort()));
                 if (!player.get_arrow().is_active()) {
-                    player.info.increase_shots();
+                    player.get_info().increase_shots();
                     player.get_arrow().set_active(msg.get_signal());
                 }
             }
@@ -130,7 +139,7 @@ public class SocketServer {
             msg = gson.fromJson(msg_str, SignalMsg.class);
         }
         catch (IOException e) {
-            System.out.println("Error read");
+            System.out.println("Client disconnect - " + ss.getPort());
         }
         return msg;
     }

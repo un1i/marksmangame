@@ -1,8 +1,8 @@
-package org.example.marksmangame;
+package org.example.marksmangame.messages;
 
 public class AuthMsg {
     String name;
-    AuthMsg(String name) {
+    public AuthMsg(String name) {
         this.name = name;
     }
 
