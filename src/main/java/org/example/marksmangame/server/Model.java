@@ -34,6 +34,10 @@ public class Model {
         players[id] = player;
     }
 
+    void delete_id(int port) {
+        player_id_by_port.remove(port);
+    }
+
     boolean check_ready() {
         for (Player pl: players) {
             if (pl != null && !pl.is_ready()) {
@@ -234,7 +238,7 @@ public class Model {
         return game_status;
     }
 
-    public int get_free_id() {
+    public int get_free_num_on_field() {
         for (int i = 0; i < max_players; i++) {
             if (players[i] == null) {
                 return i;

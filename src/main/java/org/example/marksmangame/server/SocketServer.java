@@ -8,6 +8,7 @@ import org.example.marksmangame.messages.*;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.List;
 
 public class SocketServer {
     Gson gson = new Gson();
@@ -43,6 +44,13 @@ public class SocketServer {
             SignalMsg msg = read_msg();
             if (msg == null) {
                 model.add_player(model.get_player_id(ss.getPort()), null);
+                model.delete_id(ss.getPort());
+                try {
+                    ss.close();
+                }
+                catch (IOException e) {
+                    System.out.println("Error disconnect client" + e);
+                }
                 model.decrease_cnt_players();
                 break;
             }
@@ -67,6 +75,9 @@ public class SocketServer {
                     model.pause_game();
                 }
             }
+            else if (msg.get_action() == MsgAction.GET_LEADERBOARD) {
+                send_leaderboard();
+            }
 
         }
     }
@@ -84,7 +95,7 @@ public class SocketServer {
     }
 
     public void send_unready() {
-        String str_msg = gson.toJson(new Msg(MsgAction.SET_UNREADY, null, null, null));
+        String str_msg = gson.toJson(new Msg(MsgAction.SET_UNREADY, null, null, null, null));
         try {
             dos.writeUTF(str_msg);
         } catch (IOException e) {
@@ -103,16 +114,29 @@ public class SocketServer {
 
     public void send_winner(PlayerInfo info) {
         PlayerInfo[] info_data = new PlayerInfo[] {info};
-        String str_msg = gson.toJson(new Msg(MsgAction.WINNER, null, null, info_data));
+        String str_msg = gson.toJson(new Msg(MsgAction.WINNER, null, null, info_data, null));
         try {
             dos.writeUTF(str_msg);
         } catch (IOException e) {
             System.out.println("Error send winner");
         }
     }
+
+    private void send_leaderboard() {
+        List<PlayerStatistic> leaderboard = DB.get_leaderboard();
+        String str_msg = gson.toJson(new Msg(MsgAction.SEND_LEADERBOARD, null, null,
+                null, leaderboard));
+        try {
+            dos.writeUTF(str_msg);
+        } catch (IOException e) {
+            System.out.println("Error send leaderboard");
+        }
+    }
+
     public void send_data() {
         ArrowData[] arrows = model.get_data_arrows();
-        String str_msg = gson.toJson(new Msg(MsgAction.SEND_DATA, model.get_target_coords(), arrows, model.get_data_info()));
+        String str_msg = gson.toJson(new Msg(MsgAction.SEND_DATA, model.get_target_coords(), arrows,
+                model.get_data_info(), null));
         try {
             dos.writeUTF(str_msg);
         } catch (IOException e) {
@@ -122,7 +146,7 @@ public class SocketServer {
 
     public void send_new_player(int id) {
         PlayerInfo[] info = model.get_players_info();
-        Msg msg = new Msg(MsgAction.NEW_PLAYER, null, null, info);
+        Msg msg = new Msg(MsgAction.NEW_PLAYER, null, null, info, null);
         msg.set_new_player_id(id);
         String str_msg = gson.toJson(msg);
         try {

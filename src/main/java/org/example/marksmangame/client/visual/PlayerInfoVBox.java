@@ -12,6 +12,9 @@ public class PlayerInfoVBox extends VBox {
     Label shots_label;
     Label score_val;
     Label shots_val;
+    Label wins_label;
+    Label wins_val;
+
     public PlayerInfoVBox(PlayerInfo info) {
         super();
         double height = AppConfig.playing_field_height / 4;
@@ -31,7 +34,14 @@ public class PlayerInfoVBox extends VBox {
 
         shots_val = new Label(Integer.toString(info.get_shots()));
         this.getChildren().add(shots_val);
-        this.setLayoutY(info.get_id() * height);
+
+        wins_label = new Label("Победы:");
+        this.getChildren().add(wins_label);
+
+        wins_val = new Label(Integer.toString(info.get_stat().getNum_wins()));
+        this.getChildren().add(wins_val);
+
+        this.setLayoutY(info.get_num_on_field() * height);
         this.setLayoutX(30);
         this.setAlignment(Pos.CENTER);
     }
@@ -43,6 +53,10 @@ public class PlayerInfoVBox extends VBox {
 
     public void update_shots_val(int val) {
         shots_val.setText(Integer.toString(val));
+    }
+
+    public void update_wins_val(int val) {
+        wins_val.setText(Integer.toString(val));
     }
 
 }

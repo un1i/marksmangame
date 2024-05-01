@@ -5,6 +5,7 @@ import org.example.marksmangame.client.Player;
 import org.example.marksmangame.messages.AuthMsg;
 import org.example.marksmangame.messages.AuthResponse;
 import org.example.marksmangame.messages.MsgData.Point;
+import org.hibernate.Session;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -23,6 +24,8 @@ public class Server {
     }
 
     void run() {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        session.close();
         model.set_server(this);
         ServerSocket ss;
         Socket cs;
@@ -63,12 +66,14 @@ public class Server {
 
                 if (result) {
                     model.increase_cnt_players();
-                    int id = model.get_free_id();
+                    int num_on_field = model.get_free_num_on_field();
+                    PlayerStatistic player_stat = DB.get_player_stat(msg.get_name());
 
-                    Player player = new Player(server_socket, Model.arrows[id], id, msg.get_name());
-                    model.set_player_id(cs.getPort(), id);
-                    model.add_player(id, player);
-                    model.send_new_player(id);
+                    Player player = new Player(server_socket, Model.arrows[num_on_field], num_on_field,
+                            msg.get_name(), player_stat);
+                    model.set_player_id(cs.getPort(), num_on_field);
+                    model.add_player(num_on_field, player);
+                    model.send_new_player(num_on_field);
                     server_socket.listen_msg();
                 }
                 else {
@@ -118,6 +123,8 @@ public class Server {
                             player.get_arrow().remove();
                             player.get_info().increase_score(target.get_points_for_hit());
                             if (player.get_info().get_score() >= AppConfig.points_for_win) {
+                                player.increase_num_wins();
+                                DB.increase_num_wins(player.get_stat());
                                 model.send_winner(player.get_info());
                                 stop_game();
                             }

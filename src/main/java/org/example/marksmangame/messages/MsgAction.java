@@ -8,5 +8,7 @@ public enum MsgAction {
     NEW_PLAYER,
     WINNER,
     SET_UNREADY,
-    PAUSE
+    PAUSE,
+    GET_LEADERBOARD,
+    SEND_LEADERBOARD
 }

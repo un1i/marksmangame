@@ -12,7 +12,7 @@ import org.example.marksmangame.client.PlayerInfo;
 public class WinnerWindow {
     public static void show(PlayerInfo info) {
         Stage window = new Stage();
-        window.initModality(Modality.WINDOW_MODAL);
+        window.initModality(Modality.APPLICATION_MODAL);
         VBox vBox = new VBox(10);
         vBox.setAlignment(Pos.CENTER);
         Scene scene = new Scene(vBox, 300, 200);

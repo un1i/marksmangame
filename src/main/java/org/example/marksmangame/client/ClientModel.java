@@ -2,6 +2,9 @@ package org.example.marksmangame.client;
 
 import org.example.marksmangame.messages.MsgData.ArrowData;
 import org.example.marksmangame.messages.MsgData.Point;
+import org.example.marksmangame.server.PlayerStatistic;
+
+import java.util.List;
 
 public class ClientModel {
 
@@ -47,5 +50,9 @@ public class ClientModel {
 
     public void show_winner(PlayerInfo info) {
         mc.show_winner(info);
+    }
+
+    public void show_leaderboard(List<PlayerStatistic> leaderboard) {
+        mc.show_leaderboard(leaderboard);
     }
 }

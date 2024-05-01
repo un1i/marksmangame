@@ -7,14 +7,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
-import org.example.marksmangame.client.visual.ConnectWindow;
-import org.example.marksmangame.client.visual.PlayerIconsField;
-import org.example.marksmangame.client.visual.PlayerInfoControlPanel;
-import org.example.marksmangame.client.visual.WinnerWindow;
+import org.example.marksmangame.client.visual.*;
 import org.example.marksmangame.messages.MsgData.ArrowData;
 import org.example.marksmangame.messages.MsgAction;
 import org.example.marksmangame.messages.MsgData.Point;
 import org.example.marksmangame.messages.SignalMsg;
+import org.example.marksmangame.server.PlayerStatistic;
+
+import java.util.List;
 
 public class MainController {
     @FXML
@@ -83,9 +83,14 @@ public class MainController {
         }
     }
 
+    @FXML
+    void get_leaderboard() {
+        model.cls.send_signal(new SignalMsg(MsgAction.GET_LEADERBOARD, true));
+    }
+
     public void add_new_player(PlayerInfo info) {
         Platform.runLater( () -> {
-            iconsField.add_new_icon(info.id, info.id == model.player_id);
+            iconsField.add_new_icon(info.num_on_field, info.num_on_field == model.player_id);
             controlPanel.add_new_player(info);
         });
     }
@@ -117,7 +122,15 @@ public class MainController {
 
     public void show_winner(PlayerInfo info) {
         Platform.runLater( () -> {
+            controlPanel.update_num_wins(info);
             WinnerWindow.show(info);
+        });
+    }
+
+    public void show_leaderboard(List<PlayerStatistic> leaderboard) {
+        Platform.runLater( () -> {
+            LeaderboardWindow leaderboard_window = new LeaderboardWindow();
+            leaderboard_window.show(leaderboard);
         });
     }
 }

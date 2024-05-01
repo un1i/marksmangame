@@ -1,17 +1,23 @@
 package org.example.marksmangame.client;
 
+import org.example.marksmangame.server.PlayerStatistic;
+
+import javax.persistence.*;
 public class PlayerInfo {
     int shots;
     int score;
-    int id;
-
+    int num_on_field;
     String name;
+    private PlayerStatistic stat;
 
-    PlayerInfo(int id, String name) {
+    public PlayerInfo() {}
+
+    PlayerInfo(int num_on_field, String name, PlayerStatistic stat) {
         shots = 0;
         score = 0;
-        this.id = id;
+        this.num_on_field = num_on_field;
         this.name = name;
+        this.stat = stat;
     }
 
     public int get_score() {
@@ -20,6 +26,14 @@ public class PlayerInfo {
 
     public int get_shots() {
         return shots;
+    }
+
+    public PlayerStatistic get_stat() {
+        return stat;
+    }
+
+    public void increase_num_wins() {
+        stat.increase_num_wins();
     }
 
     public void increase_shots() {
@@ -39,7 +53,7 @@ public class PlayerInfo {
         return name;
     }
 
-    public int get_id() {
-        return id;
+    public int get_num_on_field() {
+        return num_on_field;
     }
 }

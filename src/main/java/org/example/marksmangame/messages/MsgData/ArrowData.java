@@ -4,9 +4,9 @@ public class ArrowData {
     Point coords;
     boolean active_flag;
 
-    public ArrowData(Point coords, boolean is_actve) {
+    public ArrowData(Point coords, boolean is_active) {
         this.coords = coords;
-        this.active_flag = is_actve;
+        this.active_flag = is_active;
     }
 
     public Point get_coords() {

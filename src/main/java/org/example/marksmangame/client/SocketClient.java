@@ -56,6 +56,9 @@ public class SocketClient {
             else if (msg.get_action() == MsgAction.SET_UNREADY) {
                 model.set_unready();
             }
+            else if (msg.get_action() == MsgAction.SEND_LEADERBOARD) {
+                model.show_leaderboard(msg.get_leaderboard());
+            }
         }
     }
 

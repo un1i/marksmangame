@@ -19,17 +19,21 @@ public class PlayerInfoControlPanel extends GridPane {
     }
 
     public void add_new_player(PlayerInfo info) {
-        if (players[info.get_id()] == null) {
-            players[info.get_id()] = new PlayerInfoVBox(info);
-            this.add(players[info.get_id()], 0, info.get_id());
+        if (players[info.get_num_on_field()] == null) {
+            players[info.get_num_on_field()] = new PlayerInfoVBox(info);
+            this.add(players[info.get_num_on_field()], 0, info.get_num_on_field());
         }
     }
 
     public void update_data(PlayerInfo[] infos) {
         for (PlayerInfo info: infos) {
-            int id = info.get_id();
+            int id = info.get_num_on_field();
             players[id].update_score_val(info.get_score());
             players[id].update_shots_val(info.get_shots());
         }
+    }
+
+    public void update_num_wins(PlayerInfo info) {
+        players[info.get_num_on_field()].update_wins_val(info.get_stat().getNum_wins());
     }
 }

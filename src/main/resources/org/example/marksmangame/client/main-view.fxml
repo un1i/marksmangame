@@ -19,6 +19,10 @@
                <HBox.margin>
                   <Insets left="30.0" />
                </HBox.margin></Button>
+            <Button mnemonicParsing="false" onAction="#get_leaderboard" text="Таблица лидеров">
+                <HBox.margin>
+                    <Insets left="30.0" />
+                </HBox.margin></Button>
            </children>
       </HBox>
    </bottom>
